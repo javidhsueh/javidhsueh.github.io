@@ -6,3 +6,8 @@ Enter Here your Custom CSS Style!!
 	text-decoration: underline;
 	color: #55606A;
 }
+
+.rev {
+	unicode-bidi:bidi-override;
+  	direction:rtl;
+}
