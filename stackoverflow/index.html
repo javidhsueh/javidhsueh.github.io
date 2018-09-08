@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Stack Exchange API</title>
+		<meta http-equiv="cache-control" content="no-cache"/>
+		<script src="jquery-1.11.0.min.js"></script>
+
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+		<script>
+			$(document).ready(
+				function() {
+					$('#data_badges').slideUp();
+					$('#data_comments').slideUp();
+					$('#data_posts').slideUp();
+					$('#data_posthistory').slideUp();
+					$('#data_users').slideUp();
+					$('#data_votes').slideUp();
+				}
+			);
+		</script>
+		<style>
+		th {
+			text-align: left;
+			width: 100px;
+		}
+		body {
+            display: block;
+			margin: 40px auto;
+			width: 75%;
+			text-align: justify;
+		}
+		#header{
+			display: block;
+			margin: 0 auto;
+			padding-bottom: 30px;
+		}
+		</style>
+	</head>
+	<body>
+		<!-- <h2>Stack Exchange API</h2> -->
+		<img id="header" src="https://cdn.sstatic.net/apiv2/img/big-logo.png?v=2"/>
+
+		<h3>Overview:</h3>
+
+		<p>
+		Founded by Joel Spolsky and Jeff Atwood, Stack Exchange has served 5,200,000 users for various questions such as C#, Java, Javascript, PHP, Android, jQuery, Python, and C++ (top eight most discussed topics.) Under Stack Exchange, there are <a href="http://stackexchange.com/sites">118 Q&A sites</a> recording upto 8.9 million questions generating about 15 million answers. Through membership and with consents to Creative Commons License, registered users are free to ask, answer, and vote questions with feedbacks from other users. Stack Overflow has gamified a traditional Q&A process by adding a reputation system for user contributions. Users are awarded with reputation points if they give an answer to someone's question with upvotes or get their answer accepted. They may receive badges regarding to their contributions and have additional privileges.
+		</p>
+
+		<p>
+		Utilizing Stack Exchange API, we have extracted data (XML format) for the following six major categories: Badges, Comments, Posts, PostHistory, Users, and Votes. Details for these categories can be found <a href="http://api.stackoverflow.com/1.0/usage">here</a>.
+		For those who wish to access the Stack Exchange API may do so for reference purposes only, as datasets must be consistent throughout projects. Please also note that the Stack Exchange API versions 1.x will be deprecated as of May 12, 2014.
+		</p>
+
+		
+		<h3>Description:</h3>
+		The objective of this project is for you to discover something novel through a visualization of your choice. Milestone 1 is focused on learning enough Processing to help you create your visualization. Milestone 2 is more about understanding your dataset; Processing is often used for rapid prototyping, and you will be required to create two prototypes of your final visualization that can help you understand your dataset on a multi-dimensional level. StackExchange API provides a huge variety of data that you can observe at any specific angle you wish, and this project will allow you the freedom to express these angles to expose interesting perspectives of Q&A forum dynamics like StackExchange.
+
+
+		<h3>Data format</h3>
+		The full data is available at <a href="https://dl.dropboxusercontent.com/u/13215413/ecs163/stackoverflow/stackoverflow_full.zip">here</a> (453.6 MB). 
+		A reduced version is to produced by removing all the text content in the data tables, which is available at <a href="https://dl.dropboxusercontent.com/u/13215413/ecs163/stackoverflow/stackoverflow_slim.zip">here</a> (352 MB).
+		If you want to download the latest data, you can query the data on your own: 
+		Please refer to the <a href="http://api.stackoverflow.com/1.0/usage">Stack Exchange API</a>, or click below for details on CSV files.
+		
+		<br/>
+		<p><h4><a href="#" onClick="$('#data_badges').slideToggle();return false;">badges.csv</a></h4></p>
+		
+		<div id="data_badges"  class="container">
+			<div class="col-md-9 text-center">
+				<p><b>badges.csv</b></p>
+				<table class="table table-condensed table-bordered table-striped text-left">
+					<tbody>
+						
+						<tr>
+							<th>Name</th>
+							<th>Type</th>
+							<th>Comment</th>
+						</tr>
+
+						<tr>
+							<td>Id</td>
+							<td>int</td>
+							<td>primary key</td>
+						</tr>
+						<tr>
+							<td>UserId</td>
+							<td>int</td>
+							<td>"123" (user id)</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td>text</td>
+							<td>"Teacher" (badge name)</td>
+						</tr>
+						<tr>
+							<td>Date</td>
+							<td>datetime</td>
+							<td>"2008-09-15T08:55:03.923" (badge acquisition time)</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		
+		<p><h4><a href="#" onClick="$('#data_comments').slideToggle();return false;">comments.csv</a></h4></p>
+		<div id="data_comments" class="container">
+			<div class="container">
+				<div class="col-md-9 text-center">
+					<p><b>comments.csv</b></p>
+					<table class="table table-condensed table-bordered table-striped text-left">
+						<tbody>
+							<tr>
+								<th>Name</th>
+								<th>Type</th>
+								<th>Comment</th>
+							</tr>
+							<tr>
+								<td>Id</td>
+								<td>int</td>
+								<td>primary key</td>
+							</tr>
+							<tr>
+								<td>PostId</td>
+								<td>int</td>
+								<td>foreign key</td>
+							</tr>
+							<tr>
+								<td>Score</td>
+								<td>int</td>
+								<td>--</td>
+							</tr>
+							<tr>
+								<td>CreationDate</td>
+								<td>datetime</td>
+								<td>comment creation time</td>
+							</tr>
+							<tr>
+								<td>UserId</td>
+								<td>int</td>
+								<td>foreign key</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		<!-- posts.csv -->
+		<p><h4><a href="#" onClick="$('#data_posts').slideToggle();return false;">posts.csv</a></h4></p>
+		
+		<div id="data_posts" style="min-width:100%;overflow:auto; text-align:center;">
+			<div class="container">
+				<div class="col-md-9 text-center">
+					<p><b>posts.csv</b></p>
+					<table class="table table-condensed table-bordered table-striped text-left">
+						<tbody>
+							<tr>
+								<th>Name</th>
+								<th>Type</th>
+								<th>Comment</th>
+							</tr>
+							<tr>
+								<td>Id</td>
+								<td>int</td>
+								<td>primary key</td>
+							</tr>
+							<tr>
+								<td>PostTypeId</td>
+								<td>int</td>
+								<td>1: Question, 2: Answer</td>
+							</tr>
+							<tr>
+								<td>ParentID</td>
+								<td>int</td>
+								<td>only present if PostTypeId is 2</td>
+							</tr>
+							<tr>
+								<td>AcceptedAnswerId</td>
+								<td>int</td>
+								<td>only present if PostTypeId is 1</td>
+							</tr>
+							<tr>
+								<td>CreationDate</td>
+								<td>datetime</td>
+								<td>post creation time</td>
+							</tr>
+							<tr>
+								<td>Score</td>
+								<td>int</td>
+								<td>--</td>
+							</tr>
+							<tr>
+								<td>ViewCount</td>
+								<td>int</td>
+								<td>number of views on post</td>
+							</tr>
+							<tr>
+								<td>OwnerUserId</td>
+								<td>int</td>
+								<td>foreign key</td>
+							</tr>
+							<tr>
+								<td>LastEditorUserId</td>
+								<td>int</td>
+								<td>foreign key</td>
+							</tr>
+							<tr>
+								<td>LastEditorDisplayName</td>
+								<td>text</td>
+								<td>"Jeff Atwood"</td>
+							</tr>
+							<tr>
+								<td>LastEditDate</td>
+								<td>datetime</td>
+								<td>post's last edit time</td>
+							</tr>
+							<tr>
+								<td>LastActivityDate</td>
+								<td>datetime</td>
+								<td>post's last activity time</td>
+							</tr>
+							
+							<tr>
+								<td>ClosedDate</td>
+								<td>datetime</td>
+								<td>if post is closed, closing time</td>
+							</tr>
+							<tr>
+								<td>Title</td>
+								<td>text</td>
+								<td>title of post</td>
+							</tr>
+							<tr>
+								<td>Tags</td>
+								<td>array</td>
+								<td>array of user-listed tags (text)</td>
+							</tr>
+							<tr>
+								<td>AnswerCount</td>
+								<td>int</td>
+								<td>number of submitted answers</td>
+							</tr>
+							<tr>
+								<td>CommentCount</td>
+								<td>int</td>
+								<td>number of submitted comments</td>
+							</tr>
+							<tr>
+								<td>FavoriteCount</td>
+								<td>int</td>
+								<td>number of users who favorited</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- posthistory.csv -->
+		<p><h4><a href="#" onClick="$('#data_posthistory').slideToggle();return false;">posthistory.csv</a></h4></p>
+		
+		<div id="data_posthistory" style="min-width:100%;overflow:auto; text-align:center;">
+			<div class="container">
+				<div class="col-md-12 text-center">
+					<p><b>posthistory.csv</b></p>
+					<table class="table table-condensed table-bordered table-striped text-left">
+						<tbody>
+							<tr>
+								<th>Name</th>
+								<th>Type</th>
+								<th>Comment</th>
+							</tr>
+							<tr>
+								<td>Id</td>
+								<td>int</td>
+								<td>primary key</td>
+							</tr>
+							<tr>
+								<td>PostHistoryTypeId</td>
+								<td>int</td>
+								<td><ol>
+									<li>Initial Title - First title question is asked with</li>
+									<li>Initial Body - First raw body text a post is submitted with</li>
+									<li>Initial Tags - First tags a question is asked with</li>
+									<li>Edit Title - A question's title has been changed</li>
+									<li>Edit Body - A post's body has been changed, raw text stored as markdown</li>
+									<li>Edit Tags - A question's tags have been changed</li>
+									<li>Rollback Title - A question's title has reverted to a previous version.</li>
+									<li>Rollback Body - A post's body has reverted to a previous version - the raw text is stored here.</li>
+									<li>Rollback Tags - A question's tags have reverted to a previous version.</li>
+									<li> Post Closed - A post was voted to be closed.</li>
+									<li> Post Reopened - A post was voted to be reopened.</li>
+									<li> Post Deleted - A post was voted to be removed.</li>
+									<li> Post Undeleted - A post was voted to be restored.</li>
+									<li> Post Locked - A post was locked by a moderator.</li>
+									<li> Post Unlocked - A post was unlocked by a moderator.</li>
+									<li> Community Owned - A post has become community owned.</li>
+									<li> Post Migrated - A post was migrated.</li>
+									<li> Question Merged - A question has had another, deleted question merged into itself.</li>
+									<li> Question Protected - A question was protected by a moderator</li>
+									<li> Question Unprotected - A question was unprotected by a moderator</li>
+									<li> Post Disassociated - An admin removes the OwnerUserId from a post.</li>
+									<li> Question Unmerged - A previously merged question has had its answers and votes restored.</li></ol></td>
+							</tr>
+							<tr>
+								<td>PostId</td>
+								<td>int</td>
+								<td>foreign key</td>
+							</tr>
+							<tr>
+								<td>CreationDate</td>
+								<td>datetime</td>
+								<td>post creation time</td>
+							</tr>
+							<tr>
+								<td>UserId</td>
+								<td>int</td>
+								<td>foreign key</td>
+							</tr>
+							
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- users.csv -->
+		<p><h4><a href="#" onClick="$('#data_users').slideToggle();return false;">users.csv</a></h4></p>
+		
+		<div id="data_users" style="min-width:100%;overflow:auto; text-align:center;">
+			<div class="container">
+				<div class="col-md-9 text-center">
+					<p><b>users.csv</b></p>
+					<table class="table table-condensed table-bordered table-striped text-left">
+						<tbody>
+							<tr>
+								<th>Name</th>
+								<th>Type</th>
+								<th>Comment</th>
+							</tr>
+							<tr>
+								<td>Id</td>
+								<td>int</td>
+								<td>primary key</td>
+							</tr>
+							<tr>
+								<td>Reputation</td>
+								<td>int</td>
+								<td>reputation score</td>
+							</tr>
+							<tr>
+								<td>CreationDate</td>
+								<td>datetime</td>
+								<td>post creation time</td>
+							</tr>
+							<tr>
+								<td>DisplayName</td>
+								<td>text</td>
+								<td>user's display name</td>
+							</tr>
+							
+							<tr>
+								<td>WebsiteUrl</td>
+								<td>text</td>
+								<td>user's website url</td>
+							</tr>
+							<tr>
+								<td>Location</td>
+								<td>text</td>
+								<td>--</td>
+							</tr>
+							<tr>
+								<td>Age</td>
+								<td>int</td>
+								<td>user's age</td>
+							</tr>
+							
+							<tr>
+								<td>UpVotes</td>
+								<td>int</td>
+								<td>total number of received upvotes</td>
+							</tr>
+							<tr>
+								<td>DownVotes</td>
+								<td>int</td>
+								<td>total number of received downvotes</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		<!-- votes.csv -->
+		<p><h4><a href="#" onClick="$('#data_votes').slideToggle();return false;">votes.csv</a></h4></p>
+		
+		<div id="data_votes" style="min-width:100%;overflow:auto; text-align:center;">
+			<div class="container">
+				<div class="col-md-9 text-center">
+					<p><b>votes.csv</b></p>
+					<table class="table table-condensed table-bordered table-striped text-left">
+						<tbody>
+							<tr>
+								<th>Name</th>
+								<th>Type</th>
+								<th>Comment</th>
+							</tr>
+							<tr>
+								<td>Id</td>
+								<td>int</td>
+								<td>primary key</td>
+							</tr>
+							<tr>
+								<td>PostId</td>
+								<td>int</td>
+								<td>foreign key</td>
+							</tr>
+							<tr>
+								<td>VoteTypeId</td>
+								<td>int</td>
+								<td><ol>
+								<li>AcceptedByOriginator</li>
+								<li>UpMod</li>
+								<li>DownMod</li>
+								<li>Offensive</li>
+								<li>Favorite - if VoteTypeId = 5 UserId will be populated</li>
+								<li>Close</li>
+								<li>Reopen</li>
+								<li>BountyStart</li>
+								<li>BountyClose</li>
+								<li>Deletion</li>
+								<li>Undeletion</li>
+								<li>Spam</li>
+								<li>InformModerator</li>
+								</ol></td>
+							</tr>
+							<tr>
+								<td>CreationDate</td>
+								<td>datetime</td>
+								<td>vote time by user</td>
+							</tr>
+							<tr>
+								<td>UserId</td>
+								<td>int</td>
+								<td>(only for VoteTypeId 5)</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		<h3>Requirements and grading:</h3>
+		Since the multi-dimensionality of data, you are not asked to show every attributes in the visualization. However, you must use at least <b>TWO</b> tables for your visualization and explain what aspect you want to present.<br/> <br/>
+
+
+		<!-- Milestone 1 is focused on learning Processing and refining your idea about visualization. -->
+		<h4>Milestone 1 (10% of project)</h4> 
+		Your project should be able to draw two separate graphics using the provided data. One should be an interactive figure using a keyboard or mouse and the other should be an animation. What to show is up to you; just prove that you're able to load the data and draw something with it using Processing. <br><br>
+
+		<!-- milestone 2 should be exploratory. Students are encouraged to create three prototypes to help understand the dataset. -->
+		<h4>Milestone 2 (10% of project)</h4> 
+		Your project should display two <em>separate</em> simple prototypes. This means two different visualizations. At least one of the prototypes must represent a possible visualization that you wish to pursue for your final product. Use multiple categories (i.e. Badges + User + Posts) for one of the prototypes, and a single category for the other prototype. Provide a README.txt containing your explanations for choosing the datasets (and which subsets of the data) for your prototypes, and brief descriptions of your visualizations. If there are any interactive components, please include in the README.txt explanations of how to use them for the user.<br><u>Hint</u>: You may use both prototypes to contribute to your final product. Please keep in mind the specifications for the final!<br><br>
+
+		<h4>Project Due</h4>
+		By the project due date, your project should:
+		<ul>
+		<li>Include a short write-up titled WRITEUP.txt refining your text from Milestone 2: Explain why you chose the datasets (and which subsets of the data,) explaining insights you may gain through your visualization that may not be intuitive from the dataset alone. Explain what kind of questions a user interacting with your visualization may be able to answer (See "<a href="#questions">Questions to consider</a>" below). <strong>(10% of project)</strong>
+
+		<li>Visually represent one or more interesting aspects of the data, using the principles discussed in class and reading materials. <strong>(10% of project)</strong>
+
+		<li>Allow users to filter the view by selecting at least one subset of your dataset. The view should change, or an additional view should be displayed, showing only data from the selected subsets. <strong>(10% of project)</strong>
+
+		<li>Allow users to select an individual item to display the information for that item. This can be through any mouse or keyboard interaction. <strong>(10% of project)</strong>
+
+		<li>Maintain the overview while the detailed view(s) are shown, using either overview + detail or focus + context. Views should also be linked. For instance, part of the overview can be highlighted, showing where in the overview the detailed view is located. Or, items can be highlighted on mouseover using similar colors in both views. <strong>(10% of project)</strong>
+
+		<li>Be animated over time, based on the data. You can change the sizes or locations of marks, the color, saturation, or transparency of marks, you can fade them in or out, etc. Make sure it's based on the data and not just random. Ideally, animation will let users see and understand something about the temporal dynamics of the data. <strong>(10% of project)</strong>
+
+		<li>Allow users to navigate through time using a playback slider, and pause time using a pause button. <strong>(10% of project)</strong>
+
+		<li>Use suitable and effective visual encodings. <strong>(5% of project)</strong>
+
+		<li>Include a readme.txt providing instructions on how to use your project. <strong>(5% of project)</strong>
+
+		</li></ul>
+
+		<a name="questions"></a>
+		<h3>Questions to consider:</h3>
+		"Information software allows the user to ask and answer questions, make comparisons, and draw conclusions." (Week 5: Magic Ink - Bret Victor)<br><br>
+		These questions below are only for reference. Please feel free to propose any questions you believe may be interesting and challenging.<br>
+		<h4>Design Aspect</h4>
+		<ul>
+			<li>What kind of visualizations have I used already, and what did I like or not like about it?</li>
+			<li>What kind of visualizations would be ideal, specific to the given dataset?</li>
+			<li>What are the visual variables I want to use? Why? And how? (Week 3)</li>
+			<li>Must I include interactive elements? If so, why and how?</li>
+			<li>Can I simplify or modify an interactivity element of my visualization in order to ensure tight feedback loops? (Week 5: Magic Ink - Bret Victor)</li>
+		</ul>
+
+		<h4>Research Aspect</h4>
+		How do I abstract the data to address the research topics I'm interested in?
+		<ul>
+			<li>What is the average response time for certain topics? Does this depend on users with reputation?</li>
+			<li>Is there a correlation between users' reputation value and users' view counts?</li>
+			<li>Are the answers provided by users with higher reputations accepted more easily?</li>
+			<li>Do registered users with higher reputations interact with each other more often?</li>
+			<li>Which informations are more useful to the public? Which subsets can I utilize to create a multidimensional analysis of the dataset?</li>
+		</ul>
+
+		
+	</body>
+</html>
